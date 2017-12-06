@@ -12,8 +12,6 @@ def _baixa(_url,_nome):
     urllib.urlretrieve(_url, _nome)
   except:
     print 'problemas ao baixar %s' % _nome
-  else:
-    print '%s baixado' % _nome
 
 _hash = lambda(_mat): 'login=%s&token=%s' % (_mat, md5.new('%sQJEkJM2iLJiAj6LScxsZivml54SmzSy0' % _mat).hexdigest())
 
@@ -61,8 +59,9 @@ def _dump(matricula, id_livro):
     # ajusta os novos valores
     _v_p1 , _v_p2 = _p1 , _p2
     b.execute_script("navigate.next_page()")
-    print 'baixadas %d/%d paginas...' % (i,num_pag)
-  print 'fim do dump'
+    sys.stdout.write("\rbaixadas %d/%d paginas " % (i, num_pag))
+    sys.stdout.flush()
+  print '\nfim do dump'
   b.quit()
 
 def _gerapdf(_livro):
